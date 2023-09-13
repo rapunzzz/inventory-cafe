@@ -73,7 +73,13 @@ kemudian buka http://localhost:8000/main jika berhasil, bisa mulai proses deploy
 
 ## 2. Buatlah bagan yang berisi request client ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara urls.py, views.py, models.py, dan berkas html.
 ![Bagan Thaariq](bagan-thaariq.jpg)
-    - 
+    - Client mengirimkan permintaan (HTTP Request) melalui browser untuk mengakses halaman web.
+    - Permintaan ini diteruskan ke sistem routing yang dikelola oleh Django, yang mencari pola URL yang cocok dengan permintaan tersebut.
+    - Setelah menemukan pola URL yang cocok, Django akan memanggil fungsi yang terkait dalam berkas views.py.
+    - Di dalam berkas views.py, kita dapat menjalankan alur aplikasi dan operasi basis data sesuai dengan arsitektur yang telah didefinisikan dalam models.py.
+    - Setelah semua operasi selesai, fungsi yang sesuai dalam berkas views.py akan menghasilkan halaman web yang diminta oleh client dalam format HTML, yang juga dapat disebut sebagai template.
+    - Berkas HTML ini akan disimpan dalam direktori "templates" untuk penggunaan selanjutnya.
+    - Terakhir, browser client akan merender berkas HTML ini sebagai tanggapan (HTTP Response) dari server Django, sehingga menghasilkan tampilan yang dapat dilihat oleh pengguna.
 
 
 ## 3. Jelaskan mengapa kita menggunakan virtual environment? Apakah kita tetap dapat membuat aplikasi web berbasis Django tanpa menggunakan virtual environment?

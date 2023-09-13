@@ -72,7 +72,9 @@ kemudian buka http://localhost:8000/main jika berhasil, bisa mulai proses deploy
     10. Centang bagian HTTP Listener on PORT dan klik Deploy App untuk memulai proses deployment aplikasi.
 
 ## 2. Buatlah bagan yang berisi request client ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara urls.py, views.py, models.py, dan berkas html.
-![Bagan Thaariq](bagan_thaariq.png)
+![Bagan Thaariq](bagan-thaariq.jpg)
+    - 
+
 
 ## 3. Jelaskan mengapa kita menggunakan virtual environment? Apakah kita tetap dapat membuat aplikasi web berbasis Django tanpa menggunakan virtual environment?
 Kita tetap dapat membuat aplikasi tanpa menggunakan virtual environment tetapi sangat tidak disarankan karena tanpa virtual environment nantinya akan menghadapi masalah seperti konflik dependensi dengan proyek lain atau mengalami kesulitan dalam manajemen dependensi dan versi.

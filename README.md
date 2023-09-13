@@ -63,16 +63,16 @@ urlpatterns = [
 ### Melakukan deployment ke Adaptable terhadap aplikasi yang sudah dibuat sehingga nantinya dapat diakses oleh teman-temanmu melalui Internet.
 Sebelum melakukan deployment, perlu melakukan perintah python manage.py runserver
 kemudian buka http://localhost:8000/main jika berhasil, bisa mulai proses deployment pada adaptable.
-    1. Buatlah akun Adaptable.io menggunakan akun GitHub yang digunakan untuk membuat proyek shopping_list.
-    2. Jika sudah login, silakan tekan tombol New App. Pilih Connect an Existing Repository.
-    3. Hubungkan Adaptable.io dengan GitHub dan pilih All Repositories pada proses instalasi.
-    4. Pilihlah repositori proyek inventory-cafe sebagai basis aplikasi yang akan di-deploy. Pilih branch yang ingin dijadikan sebagai deployment branch.
-    5. Pilihlah Python App Template sebagai template deployment.
-    6. Pilih PostgreSQL sebagai tipe basis data yang akan digunakan.
-    7. Sesuaikan versi Python dengan spesifikasi aplikasimu. Untuk mengeceknya, nyalakan virtual environment dan jalankan perintah python --version.
-    8. Pada bagian Start Command masukkan perintah ``` python manage.py migrate && gunicorn inventory_list.wsgi. ```
-    9. Masukkan nama aplikasi yang juga akan menjadi nama domain situs web aplikasimu.
-    10. Centang bagian HTTP Listener on PORT dan klik Deploy App untuk memulai proses deployment aplikasi.
+1. Buatlah akun Adaptable.io menggunakan akun GitHub yang digunakan untuk membuat proyek shopping_list.
+2. Jika sudah login, silakan tekan tombol New App. Pilih Connect an Existing Repository.
+3. Hubungkan Adaptable.io dengan GitHub dan pilih All Repositories pada proses instalasi.
+4. Pilihlah repositori proyek inventory-cafe sebagai basis aplikasi yang akan di-deploy. Pilih branch yang ingin dijadikan sebagai deployment branch.
+5. Pilihlah Python App Template sebagai template deployment.
+6. Pilih PostgreSQL sebagai tipe basis data yang akan digunakan.
+7. Sesuaikan versi Python dengan spesifikasi aplikasimu. Untuk mengeceknya, nyalakan virtual environment dan jalankan perintah python --version.
+8. Pada bagian Start Command masukkan perintah ``` python manage.py migrate && gunicorn inventory_list.wsgi. ```
+9. Masukkan nama aplikasi yang juga akan menjadi nama domain situs web aplikasimu.
+10. Centang bagian HTTP Listener on PORT dan klik Deploy App untuk memulai proses deployment aplikasi.
 
 ## 2. Buatlah bagan yang berisi request client ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara urls.py, views.py, models.py, dan berkas html.
 ![Bagan Thaariq](bagan-thaariq.png)

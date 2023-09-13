@@ -1,3 +1,6 @@
+### Thaariq Kurnia Spama - 2206082801 - PBP F
+
+
 ## 1. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
 ### Membuat sebuah proyek Django baru.
 Langkah pertama yang saya lakukan adalah membuat direktori baru dengan nama yang diinginkan seperti "inventory_list" kemudian membuat command prompt di dalam direktori tersebut, kemudian membuat virtual environment dan mengaktifkannya. Langkah kedua membuat berkas requirements.txt pada direktori yang sama pada sebelumnya dan ditambahkan dependenciesnya. Kemudian pasang dependencies dan buat proyek Django dengan nama yang diinginkan sebelumnya seperti "inventory_list" dengan perintah ``` django-admin startproject inventory_list . ```  . Jangan lupa untuk menambahkan "*" pada ALLOWED_HOSTS di settings.py untuk keperluan deployment dan unggah proyek ke repository github. Dengan begini sebuah proyek Django baru telah berhasil dibuat.
@@ -72,7 +75,7 @@ kemudian buka http://localhost:8000/main jika berhasil, bisa mulai proses deploy
     10. Centang bagian HTTP Listener on PORT dan klik Deploy App untuk memulai proses deployment aplikasi.
 
 ## 2. Buatlah bagan yang berisi request client ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara urls.py, views.py, models.py, dan berkas html.
-![Bagan Thaariq](bagan-thaariq.jpg)
+![Bagan Thaariq](bagan-thaariq.png)
     - Client mengirimkan permintaan (HTTP Request) melalui browser untuk mengakses halaman web.
     - Permintaan ini diteruskan ke sistem routing yang dikelola oleh Django, yang mencari pola URL yang cocok dengan permintaan tersebut.
     - Setelah menemukan pola URL yang cocok, Django akan memanggil fungsi yang terkait dalam berkas views.py.

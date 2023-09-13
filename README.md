@@ -26,7 +26,7 @@ kemudian konfigurasikan routing url proyek dengan membuka berkas urls.py di dala
 
 -Untuk membuat model pada aplikasi main dengan nama Item dan memiliki atribut wajib, langkah pertama yaitu buka berkas models.py pada direktori aplikasi main dan isi berkas tersebut dengan kode:
 
---- 
+'''
 from django.db import models
 
 class Product(models.Model):
@@ -34,17 +34,17 @@ class Product(models.Model):
     date_added = models.DateField(auto_now_add=True)
     amount = models.IntegerField()
     description = models.TextField()
----
+'''
 
 - Membuat sebuah fungsi pada views.py untuk dikembalikan ke dalam sebuah template HTML. Buka berkas views.py yang terletak di dalam berkas aplikasi main, tambahkan baris-baris import berikut di bagian paling atas berkas
 
-...
+'''
 from django.shortcuts import render
-...
+'''
 
 kemudian tambahkan fungsi show_main dibawah impor :
 
-...
+'''
 def show_main(request):
     context = {
         'name': 'Pak Bepe',
@@ -52,7 +52,7 @@ def show_main(request):
     }
 
     return render(request, "main.html", context)
-...
+'''
 
 - Membuat sebuah routing pada urls.py aplikasi main untuk memetakan fungsi yang telah dibuat pada views.py.
 

@@ -12,18 +12,20 @@
 
 - Langkah pertama yang saya lakukan adalah membuat direktori baru dengan nama yang diinginkan seperti "inventory_list" kemudian membuat command prompt di dalam direktori tersebut, kemudian membuat virtual environment dan mengaktifkannya. Langkah kedua membuat berkas requirements.txt pada direktori yang sama pada sebelumnya dan ditambahkan dependenciesnya. Kemudian pasang dependencies dan buat proyek Django dengan nama yang diinginkan sebelumnya seperti "inventory_list" dengan perintah " django-admin startproject inventory_list . "  . Jangan lupa untuk menambahkan "*" pada ALLOWED_HOSTS di settings.py untuk keperluan deployment dan unggah proyek ke repository github. Dengan begini sebuah proyek Django baru telah berhasil dibuat.
 - Untuk Membuat aplikasi dengan nama main, langkah yang diperlukan yang pertama yaitu menjalankan perintah "python manage.py startapp main" pada proyek inventory_list untuk membuat aplikasi baru. Kemudian mendaftarkan aplikasi main ke dalam proyek dengan urutannya yaitu membuka berkas settings.py di dalam direktori proyek shopping_list kemudian temukan variabel INSTALLED_APPS dan Tambahkan 'main' ke dalam daftar INSTALLED_APPS
-- Melakukan routing pada proyek agar dapat menjalankan aplikasi main yaitu langkah pertama yang dilakukan dengan membuat berkas urls.py di dalam direktori main, isi urls.py dengan kode:    from django.urls import path
-                        from main.views import show_main
+- Melakukan routing pada proyek agar dapat menjalankan aplikasi main yaitu langkah pertama yang dilakukan dengan membuat berkas urls.py di dalam direktori main, isi urls.py dengan kode:    
+from django.urls import path
+from main.views import show_main
 
-                        app_name = 'main'
+app_name = 'main'
 
-                        urlpatterns = [
-                            path('', show_main, name='show_main'),
-                        ]
+urlpatterns = [
+    path('', show_main, name='show_main'),
+]
 
 kemudian konfigurasikan routing url proyek dengan membuka berkas urls.py di dalam direktori proyek inventory_list dan impor fungsi include dari django.urls. Lalu tambahkan rute urls didalam variabel urlpatterns untuk mengarahkan ke tampilan main.Untuk mengetahui apakah sudah berhasil, kita bisa menjalankan proyek Django dengan perintah python manage.py runserver ,kemudian buka http://localhost:8000/main/ di peramban web favoritmu untuk melihat halaman yang sudah kamu buat.
 
 -Untuk membuat model pada aplikasi main dengan nama Item dan memiliki atribut wajib, langkah pertama yaitu buka berkas models.py pada direktori aplikasi main dan isi berkas tersebut dengan kode:
+
 ...   
 from django.db import models
 
@@ -35,11 +37,13 @@ class Product(models.Model):
 ...
 
 - Membuat sebuah fungsi pada views.py untuk dikembalikan ke dalam sebuah template HTML. Buka berkas views.py yang terletak di dalam berkas aplikasi main, tambahkan baris-baris import berikut di bagian paling atas berkas
+
 ...
 from django.shortcuts import render
 ...
 
 kemudian tambahkan fungsi show_main dibawah impor :
+
 ...
 def show_main(request):
     context = {

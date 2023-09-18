@@ -94,3 +94,26 @@ MVT atau biasa disebut Model View Template merupakan pola arsitektur yang serupa
 MVMM atau biasa disebut Model View ViewModel merupakan turunan dari pola desain arsitektrur MVC dan berfokus pada peningkatan logika presentasi
 
 Perbedaan ketiganya yaitu terletak pada komponennnya yang berbeda. Pada MVC menggunakan Controller untuk mengatur alur Model dan View. MVT menggunakan Template untuk mengatur tampilan HTML. Dan MVVM menggunakan ViewModel untuk menghubungkan tampilan dengan data melalui pembaruan Model.
+
+
+### Tugas 3
+## 1. Apa perbedaan antara form POST dan form GET dalam Django?
+                POST	                   					                    GET
+Nilai variabel tidak ditampilkan di URL         |  Nilai variabel ditampilkan di URL sehingga user dapat dengan mudah memasukkan nilai 
+                                                |  variabel baru
+Lebih aman	                                    |  Kurang aman
+Tidak dibatasi panjang string	                |  Dibatasi panjang string sampai 2047 karakter
+Pengambilan variabel dengan request.POST.get    |  Pengambilan variabel dengan request.POST.get
+Biasanya untuk input data melalui form	        |  Biasanya untuk input data melalui link
+Digunakan untuk mengirim data-data penting      |  Digunakan untuk mengirim data-data tidak penting
+seperti password	                            |
+
+## 2. Apa perbedaan utama antara XML, JSON, dan HTML dalam konteks pengirim data?
+XML digunakan untuk menyimpan dan mengirim data terstruktur.
+JSON digunakan untuk pertukaran data yang sederhana, terutama dalam hal aplikasi web
+HTML digunakan untuk membuat struktur dan tampilan halaman web, bukan untuk pertukaran data
+Dapat disimpulkan bahwa XML dan JSON digunakan untuk pertukaran data, sementara HTML digunakan untuk mengatur tampilan dan struktur konten halaman web.
+
+## 3. Mengapa JSON sering digunakan dalam pertukaran data antara aplikasi web modern?
+Karena JSON memiliki banyak keuntungan seperti lebih ringan,lebih cepat dan lebih sederhana dari segi sintaksisnya dibandingkan dengan XML. Untuk itu JSON memungkinkan pengembang dapat mengirim, menerima dan meproses data dari berbagai jenis aplikasi dengan cepat dan mudah
+## 4. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).

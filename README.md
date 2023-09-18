@@ -98,15 +98,21 @@ Perbedaan ketiganya yaitu terletak pada komponennnya yang berbeda. Pada MVC meng
 
 ### Tugas 3
 ## 1. Apa perbedaan antara form POST dan form GET dalam Django?
-                POST	                   					                    GET
-Nilai variabel tidak ditampilkan di URL         |  Nilai variabel ditampilkan di URL sehingga user dapat dengan mudah memasukkan nilai 
-                                                |  variabel baru
-Lebih aman	                                    |  Kurang aman
-Tidak dibatasi panjang string	                |  Dibatasi panjang string sampai 2047 karakter
-Pengambilan variabel dengan request.POST.get    |  Pengambilan variabel dengan request.POST.get
-Biasanya untuk input data melalui form	        |  Biasanya untuk input data melalui link
-Digunakan untuk mengirim data-data penting      |  Digunakan untuk mengirim data-data tidak penting
-seperti password	                            |
+                POST	             
+- Nilai variabel tidak ditampilkan di URL   
+- Lebih aman
+- Tidak dibatasi panjang string	           
+- Pengambilan variabel dengan request.POST.get   
+- Biasanya untuk input data melalui form	       
+- Digunakan untuk mengirim data-data penting seperti password	                            
+
+                GET    
+- Nilai variabel ditampilkan di URL sehingga user dapat dengan mudah memasukkan nilai variabel baru
+- Kurang aman
+- Dibatasi panjang string sampai 2047 karakter
+- Pengambilan variabel dengan request.POST.get
+- Biasanya untuk input data melalui link
+- Digunakan untuk mengirim data-data tidak penting
 
 ## 2. Apa perbedaan utama antara XML, JSON, dan HTML dalam konteks pengirim data?
 XML digunakan untuk menyimpan dan mengirim data terstruktur.
@@ -117,3 +123,112 @@ Dapat disimpulkan bahwa XML dan JSON digunakan untuk pertukaran data, sementara 
 ## 3. Mengapa JSON sering digunakan dalam pertukaran data antara aplikasi web modern?
 Karena JSON memiliki banyak keuntungan seperti lebih ringan,lebih cepat dan lebih sederhana dari segi sintaksisnya dibandingkan dengan XML. Untuk itu JSON memungkinkan pengembang dapat mengirim, menerima dan meproses data dari berbagai jenis aplikasi dengan cepat dan mudah
 ## 4. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+
+### Membuat input form untuk menambahkan objek model pada app sebelumnya.
+Untuk membuat input form dengan membuat berkas baru pada direktori `main` dengan nama forms.py dan tambahkan kode berikut 
+```python
+from django.forms import ModelForm
+from main.models import Product
+
+class ProductForm(ModelForm):
+    class Meta:
+        model = Product
+        fields = ["name", "amount", "description"]
+```
+kemudian buka berkas `views.py` pada folder main dan tambahkan beberapa import berikut
+```python
+from django.http import HttpResponseRedirect
+from main.forms import ProductForm
+from django.urls import reverse
+```
+Selanjutnya buat fungsi baru dengan nama `create_product` pada berkas tersebut untuk menerima parameter `request`dan isi fungsi tersebut dengan kode berikut untuk menghasilkan formulir yang memungkinkan pengguna untuk menambahkan data produk secara otomatis saat data tersebut di-submit melalui formulir.
+```python
+def create_product(request):
+    form = ProductForm(request.POST or None)
+
+    if form.is_valid() and request.method == "POST":
+        form.save()
+        return HttpResponseRedirect(reverse('main:show_main'))
+
+    context = {'form': form}
+    return render(request, "create_product.html", context)
+```
+Ubah fungsi `show_main` pada berkas views.py menjadi seperti berikut
+```python
+def show_main(request):
+    products = Product.objects.all()
+
+    context = {
+        'name': 'Pak Bepe', # Nama kamu
+        'class': 'PBP A', # Kelas PBP kamu
+        'products': products
+    }
+
+    return render(request, "main.html", context)
+```
+Import fungsi `create_product` pada berkas `urls.py` di folder main
+```python
+from main.views import show_main, create_product
+```
+Tambahkan path URL ke dalam bagian `urlpatterns` pada berkas `urls.py` di direktori "main" untuk mengakses fungsi yang sudah di-import sebelumnya
+```python
+path('create-product', create_product, name='create_product'),
+```
+Buat berkas HTML baru dengan nama `create_product.html` pada direktori `main/templates`. Isi `create_product.html` dengan kode berikut.
+```html
+{% extends 'base.html' %} 
+
+{% block content %}
+<h1>Add New Product</h1>
+
+<form method="POST">
+    {% csrf_token %}
+    <table>
+        {{ form.as_table }}
+        <tr>
+            <td></td>
+            <td>
+                <input type="submit" value="Add Product"/>
+            </td>
+        </tr>
+    </table>
+</form>
+
+{% endblock %}
+```
+tambahkan kode berikut di dalam `{% block content %}` di `main.html` untuk menampilkan data produk dalam bentuk table serta tombol "Add New Product" yang akan redirect ke halaman form.
+```html
+...
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Description</th>
+        <th>Date Added</th>
+    </tr>
+
+    {% comment %} Berikut cara memperlihatkan data produk di bawah baris ini {% endcomment %}
+
+    {% for product in products %}
+        <tr>
+            <td>{{product.name}}</td>
+            <td>{{product.price}}</td>
+            <td>{{product.description}}</td>
+            <td>{{product.date_added}}</td>
+        </tr>
+    {% endfor %}
+</table>
+
+<br />
+
+<a href="{% url 'main:create_product' %}">
+    <button>
+        Add New Product
+    </button>
+</a>
+
+{% endblock content %}
+```
+### Tambahkan 5 fungsi views untuk melihat objek yang sudah ditambahkan dalam format HTML, XML, JSON, XML by ID, dan JSON by ID.
+
+### Membuat routing URL untuk masing-masing views yang telah ditambahkan pada poin 2.

@@ -196,7 +196,7 @@ Buat berkas HTML baru dengan nama `create_product.html` pada direktori `main/tem
 
 {% endblock %}
 ```
-tambahkan kode berikut di dalam `{% block content %}` di `main.html` untuk menampilkan data produk dalam bentuk table serta tombol "Add New Product" yang akan redirect ke halaman form.
+Tambahkan kode berikut di dalam `{% block content %}` di `main.html` untuk menampilkan data produk dalam bentuk table serta tombol "Add New Product" yang akan redirect ke halaman form.
 ```html
 ...
 <table>
@@ -230,5 +230,60 @@ tambahkan kode berikut di dalam `{% block content %}` di `main.html` untuk menam
 {% endblock content %}
 ```
 ### Tambahkan 5 fungsi views untuk melihat objek yang sudah ditambahkan dalam format HTML, XML, JSON, XML by ID, dan JSON by ID.
+Buat 5 fungsi views pada berkas `views.py` di direktori main dengan kode sebagai berikut
+```python
+def show_main(request):
+    products = Product.objects.all()
+    context = {
+        'name': 'Thaariq Kurnia Spama',
+        'class': 'PBP F',
+        'products': products
+    }
 
+    return render(request, "main.html", context)
+
+def show_xml(request):
+    data = Product.objects.all()
+    return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
+
+def show_json(request):
+    data = Product.objects.all()
+    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+
+def show_xml_by_id(request, id):
+    data = Product.objects.filter(pk=id)
+    return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
+
+def show_json_by_id(request, id):
+    data = Product.objects.filter(pk=id)
+    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+```
+Kemudian buka `urls.py` pada folder main dan import fungsi sebelumnya
+```python
+from main.views import show_main, show_xml, show_json, show_xml_by_id, show_json_by_id 
+```
+Dan  Tambahkan path url ke dalam `urlpatterns` untuk mengakses fungsi yang sudah diimport tadi
+```python
+...
+    path('', show_main, name='show_main'),
+    path('xml/', show_xml, name='show_xml'), 
+    path('json/', show_json, name='show_json'), 
+    path('xml/<int:id>/', show_xml_by_id, name='show_xml_by_id'),
+    path('json/<int:id>/', show_json_by_id, name='show_json_by_id'),
+...
+```
 ### Membuat routing URL untuk masing-masing views yang telah ditambahkan pada poin 2.
+Buka `urls.py` pada folder main dan import fungsi yang telah ditambahkan pada poin 2
+```python
+from main.views import show_main, show_xml, show_json, show_xml_by_id, show_json_by_id 
+```
+Kemudian tambahkan path url ke dalam `urlpatterns` untuk mengakses fungsi yang sudah diimport tadi
+```python
+...
+    path('', show_main, name='show_main'),
+    path('xml/', show_xml, name='show_xml'), 
+    path('json/', show_json, name='show_json'), 
+    path('xml/<int:id>/', show_xml_by_id, name='show_xml_by_id'),
+    path('json/<int:id>/', show_json_by_id, name='show_json_by_id'),
+...
+```

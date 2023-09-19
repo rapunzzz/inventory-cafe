@@ -15,12 +15,8 @@ import environ
 import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-<<<<<<< HEAD
 env = environ.Env()
 
-=======
-env = environ.Env() 
->>>>>>> c189f0845a38a85a2edf49a35ae37987a5f85769
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
@@ -86,20 +82,13 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> c189f0845a38a85a2edf49a35ae37987a5f85769
 # Set database settings automatically using DATABASE_URL.
 if PRODUCTION:
     DATABASES = {
         'default': env.db('DATABASE_URL')
     }
     DATABASES["default"]["ATOMIC_REQUESTS"] = True
-<<<<<<< HEAD
 
-=======
->>>>>>> c189f0845a38a85a2edf49a35ae37987a5f85769
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
@@ -135,10 +124,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
-<<<<<<< HEAD
-=======
-
->>>>>>> c189f0845a38a85a2edf49a35ae37987a5f85769
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

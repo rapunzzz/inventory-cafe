@@ -8,10 +8,18 @@ from django.core import serializers
 # Create your views here.
 def show_main(request):
     products = Product.objects.all()
+<<<<<<< HEAD
     context = {
         'name': 'Thaariq Kurnia Spama',
         'class': 'PBP F',
         'products': products
+=======
+
+    context = {
+        'name': 'Thaariq Kurnia Spama',
+        'class': 'PBP F',
+        'products' : products
+>>>>>>> c189f0845a38a85a2edf49a35ae37987a5f85769
     }
 
     return render(request, "main.html", context)

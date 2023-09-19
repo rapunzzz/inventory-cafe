@@ -29,4 +29,8 @@ RUN chown -R django:django /app
 USER django
 
 # Run application
+<<<<<<< HEAD
 # CMD gunicorn inventory_list.wsgi:application
+=======
+# CMD gunicorn shopping_list.wsgi:application
+>>>>>>> c189f0845a38a85a2edf49a35ae37987a5f85769

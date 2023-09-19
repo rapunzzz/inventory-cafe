@@ -98,7 +98,7 @@ Perbedaan ketiganya yaitu terletak pada komponennnya yang berbeda. Pada MVC meng
 
 ### Tugas 3
 ## 1. Apa perbedaan antara form POST dan form GET dalam Django?
-                POST	             
+POST	             
 - Nilai variabel tidak ditampilkan di URL   
 - Lebih aman
 - Tidak dibatasi panjang string	           
@@ -106,7 +106,7 @@ Perbedaan ketiganya yaitu terletak pada komponennnya yang berbeda. Pada MVC meng
 - Biasanya untuk input data melalui form	       
 - Digunakan untuk mengirim data-data penting seperti password	                            
 
-                GET    
+GET    
 - Nilai variabel ditampilkan di URL sehingga user dapat dengan mudah memasukkan nilai variabel baru
 - Kurang aman
 - Dibatasi panjang string sampai 2047 karakter
@@ -163,7 +163,6 @@ def show_main(request):
         'class': 'PBP A', # Kelas PBP kamu
         'products': products
     }
-
     return render(request, "main.html", context)
 ```
 Import fungsi `create_product` pada berkas `urls.py` di folder main

@@ -231,15 +231,15 @@ Tambahkan kode berikut di dalam `{% block content %}` di `main.html` untuk menam
 ### Tambahkan 5 fungsi views untuk melihat objek yang sudah ditambahkan dalam format HTML, XML, JSON, XML by ID, dan JSON by ID.
 Buat 5 fungsi views pada berkas `views.py` di direktori main dengan kode sebagai berikut
 ```python
-def show_main(request):
-    products = Product.objects.all()
-    context = {
-        'name': 'Thaariq Kurnia Spama',
-        'class': 'PBP F',
-        'products': products
-    }
+def create_product(request):
+    form = ProductForm(request.POST or None)
 
-    return render(request, "main.html", context)
+    if form.is_valid() and request.method == "POST":
+        form.save()
+        return HttpResponseRedirect(reverse('main:show_main'))
+
+    context = {'form': form}
+    return render(request, "create_product.html", context)
 
 def show_xml(request):
     data = Product.objects.all()
@@ -260,12 +260,12 @@ def show_json_by_id(request, id):
 ### Membuat routing URL untuk masing-masing views yang telah ditambahkan pada poin 2.
 Buka `urls.py` pada folder main dan import fungsi yang telah ditambahkan pada poin 2
 ```python
-from main.views import show_main, show_xml, show_json, show_xml_by_id, show_json_by_id 
+from main.views import create_product, show_xml, show_json, show_xml_by_id, show_json_by_id 
 ```
 Kemudian tambahkan path url ke dalam `urlpatterns` untuk mengakses fungsi yang sudah diimport tadi
 ```python
 ...
-    path('', show_main, name='show_main'),
+    path('create-product', create_product, name='create_product'),
     path('xml/', show_xml, name='show_xml'), 
     path('json/', show_json, name='show_json'), 
     path('xml/<int:id>/', show_xml_by_id, name='show_xml_by_id'),

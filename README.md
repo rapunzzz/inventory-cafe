@@ -272,3 +272,8 @@ Kemudian tambahkan path url ke dalam `urlpatterns` untuk mengakses fungsi yang s
     path('json/<int:id>/', show_json_by_id, name='show_json_by_id'),
 ...
 ```
+![Main Thaariq](main_thaariq.jpg)
+![XML Thaariq](xml_thaariq.jpg)
+![JSON Thaariq](json_thaariq.jpg)
+![XML ID Thaariq](xml_id_thaariq.jpg)
+![JSON ID Thaariq](json_id_thaariq.jpg)

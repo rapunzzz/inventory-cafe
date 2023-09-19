@@ -272,7 +272,11 @@ Kemudian tambahkan path url ke dalam `urlpatterns` untuk mengakses fungsi yang s
     path('json/<int:id>/', show_json_by_id, name='show_json_by_id'),
 ...
 <<<<<<< HEAD
+<<<<<<< HEAD
 ```
 =======
 ```
 >>>>>>> c189f0845a38a85a2edf49a35ae37987a5f85769
+=======
+```
+>>>>>>> bada0a7fa7f6ea3787a450b03925c7be23e877e6

@@ -35,8 +35,14 @@
             Add New Product
         </button>
     </a>
-<<<<<<< HEAD
+    <p id="item-count-message"></p>
 
-=======
->>>>>>> c189f0845a38a85a2edf49a35ae37987a5f85769
+    <script>
+        // Hitung jumlah item dari tabel data
+       var item_count = {{ products|length }};
+
+    // Tampilkan pesan
+    var pesan = "Kamu menyimpan " + item_count + " item pada aplikasi ini";
+    document.getElementById("item-count-message").textContent = pesan;
+    </script>
 {% endblock content %}

@@ -464,9 +464,11 @@ from main.views import logout_user
 path('logout/', logout_user, name='logout'),
 ```
 ### Membuat dua akun pengguna dengan masing-masing tiga dummy data menggunakan model yang telah dibuat pada aplikasi sebelumnya untuk setiap akun di lokal.
-akun pertama
+Akun pertama
 ![Akun Rapunzz](rapunzz.jpg)
-akun kedua
+
+
+Akun kedua
 ![Akun Spama](spama.jpg)
 
 ### Menghubungkan model Item dengan User.

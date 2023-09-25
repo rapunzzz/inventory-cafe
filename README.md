@@ -272,3 +272,242 @@ Kemudian tambahkan path url ke dalam `urlpatterns` untuk mengakses fungsi yang s
     path('json/<int:id>/', show_json_by_id, name='show_json_by_id'),
 ...
 ```
+### Tugas 4
+## Apa itu Django UserCreationForm, dan jelaskan apa kelebihan dan kekurangannya?
+formulir yang disediakan dari DJango unutk mempermudah pengelolaan pengguna user dalam aplikasi web. Kelebihannya itu mudah digunakan, kustomisasi dan kompatibilitas dengan model pengguna. Kekurangannya itu karena terbatas pada model user bawaan, tampilan standar dan kurangnya fitur khusus.
+
+## Apa perbedaan antara autentikasi dan otorisasi dalam konteks Django, dan mengapa keduanya penting?
+Autentikasi merupakan proses verifikasi identitas pengguna. Autentikasi membantu melindungi suatu aplikasi dari akses yang tidak sah dengan memastikan bahwa hanya pengguna yang sah yang dapat masuk
+Otorisasi merupakan tindakan memberi izin kepada pihak yang diautentikasi untuk melakukan sesuatu. Otorisasi membantu melindungi suatu aplikasi dengan memastikan bahwa pengguna hanya dapat melakukan tindakan yang mereka izinkan, dan ini memungkinkan untuk mengelola hak akses secara efisien.
+Keduanya penting karena sama-sama untuk menjaga keamanan aplikasi web
+
+## Apa itu cookies dalam konteks aplikasi web, dan bagaimana Django menggunakan cookies untuk mengelola data sesi pengguna?
+Cookies adalah file teks yang menyimpan data kecil untuk mengidentifikasi komputer saat menggunakan jaringan komputer. Dalam konteks aplikasi web, Django menggunakan cookies untuk mengelola data sesi pengguna. Django menyediakan fitur session framework yang memungkinkan pengguna untuk menyimpan data sesi di dalam cookies. Data sesi ini dapat digunakan untuk menyimpan informasi seperti preferensi pengguna, keranjang belanja, riwayat penelusuran, dan lain-lain.
+
+## Apakah penggunaan cookies aman secara default dalam pengembangan web, atau apakah ada risiko potensial yang harus diwaspadai?
+Cookies dapat digunakan secara aman dalam pengembangan web, tetapi diperlukan perhatian terhadap praktik keamanan yang baik dan implementasi yang benar untuk meminimalkan risiko. Penting untuk selalu mengikuti pedoman keamanan web terkini dan melakukan audit keamanan secara berkala untuk mengidentifikasi potensi risiko dan mengatasinya secepat mungkin.
+
+## Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+
+### Mengimplementasikan fungsi registrasi, login, dan logout untuk memungkinkan pengguna untuk mengakses aplikasi sebelumnya dengan lancar.
+# Fungsi registrasi
+Buat fungsi bernama `register` pada `views.py` di subdirektori `main` yang berisi code seperti berikut.
+```python
+def register(request):
+    form = UserCreationForm()
+
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Your account has been successfully created!')
+            return redirect('main:login')
+    context = {'form':form}
+    return render(request, 'register.html', context)
+```
+Tambahkan import `redirect`,`UserCreationForm`, dan `messages` 
+```python
+from django.shortcuts import redirect
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib import messages  
+```
+Buat berkas HTML baru dengan nama `register.html` pada folder `main/templates` yang berisi berikut.
+```html
+{% extends 'base.html' %}
+
+{% block meta %}
+    <title>Register</title>
+{% endblock meta %}
+
+{% block content %}  
+
+<div class = "login">
+    
+    <h1>Register</h1>  
+
+        <form method="POST" >  
+            {% csrf_token %}  
+            <table>  
+                {{ form.as_table }}  
+                <tr>  
+                    <td></td>
+                    <td><input type="submit" name="submit" value="Daftar"/></td>  
+                </tr>  
+            </table>  
+        </form>
+
+    {% if messages %}  
+        <ul>   
+            {% for message in messages %}  
+                <li>{{ message }}</li>  
+                {% endfor %}  
+        </ul>   
+    {% endif %}
+
+</div>  
+
+{% endblock content %}
+```
+Impor fungsi yang sudah dibuat sebelumnya dan tambahkan path url ke dalam `urlpatterns` di berkas `urls.py` pada subdirektori `main`
+```python
+from main.views import register
+```
+```python
+...
+path('register/', register, name='register'),
+```
+
+# Fungsi Login
+Buat fungsi bernama `register` pada `views.py` di subdirektori `main` yang berisi code seperti berikut.
+```python
+def login_user(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('main:show_main')
+        else:
+            messages.info(request, 'Sorry, incorrect username or password. Please try again.')
+    context = {}
+    return render(request, 'login.html', context)
+```
+Tambahkan import `authenticate`, dan `login` 
+```python
+from django.contrib.auth import authenticate, login
+```
+Buat berkas HTML baru dengan nama `login.html` pada folder `main/templates` yang berisi berikut.
+```html
+{% extends 'base.html' %}
+
+{% block meta %}
+    <title>Login</title>
+{% endblock meta %}
+
+{% block content %}
+
+<div class = "login">
+
+    <h1>Login</h1>
+
+    <form method="POST" action="">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <td>Username: </td>
+                <td><input type="text" name="username" placeholder="Username" class="form-control"></td>
+            </tr>
+                    
+            <tr>
+                <td>Password: </td>
+                <td><input type="password" name="password" placeholder="Password" class="form-control"></td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td><input class="btn login_btn" type="submit" value="Login"></td>
+            </tr>
+        </table>
+    </form>
+
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}     
+        
+    Don't have an account yet? <a href="{% url 'main:register' %}">Register Now</a>
+
+</div>
+
+{% endblock content %}
+```
+Impor fungsi yang sudah dibuat sebelumnya dan tambahkan path url ke dalam `urlpatterns` di berkas `urls.py` pada subdirektori `main`
+```python
+from main.views import login_user
+```
+```python
+...
+path('login/', login_user, name='login'),
+```
+
+# Fungsi Logout
+Buat fungsi bernama `logout_user` pada `views.py` di subdirektori `main` yang berisi code seperti berikut.
+```python
+def logout_user(request):
+    logout(request)
+    return redirect('main:login')
+```
+Tambahkan import `redirect`,`UserCreationForm`, dan `messages` 
+```python
+from django.contrib.auth import logout
+```
+Tambahkan potongan kode berikut setelah hyperlink tag untuk Add New Product pada berkas `main.html`
+```html
+...
+<a href="{% url 'main:logout' %}">
+    <button>
+        Logout
+    </button>
+</a>
+...
+```
+Impor fungsi yang sudah dibuat sebelumnya dan tambahkan path url ke dalam `urlpatterns` di berkas `urls.py` pada subdirektori `main`
+```python
+from main.views import logout_user
+```
+```python
+...
+path('logout/', logout_user, name='logout'),
+```
+### Membuat dua akun pengguna dengan masing-masing tiga dummy data menggunakan model yang telah dibuat pada aplikasi sebelumnya untuk setiap akun di lokal.
+akun pertama
+![Akun Rapunzz](rapunzz.jpg)
+akun kedua
+![Akun Spama](spama.jpg)
+
+### Menghubungkan model Item dengan User.
+Tambahkan code berikut untuk mengimpor model pada berkas `models.py` di subdirektori `main`
+```python
+...
+from django.contrib.auth.models import User
+...
+```
+Pada model `product` yang sudah ada ,tambahkan kode berikut.
+```python
+class Product(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    ...
+```
+Ubah fungsi `create_product` pada berkas `views.py` di subdirektori `main`
+```python
+def create_product(request):
+ form = ProductForm(request.POST or None)
+
+ if form.is_valid() and request.method == "POST":
+     product = form.save(commit=False)
+     product.user = request.user
+     product.save()
+     return HttpResponseRedirect(reverse('main:show_main'))
+ ...
+ ```
+ dan ubah fungsi `show_main` juga 
+ ```python
+ def show_main(request):
+    products = Product.objects.filter(user=request.user)
+
+    context = {
+        'name': request.user.username,
+    ...
+...
+```
+Lakukan migrasi model  dengan perintah `python manage.py makemigrations` pada terminal, Kemudian pilih `1`  untuk menetapkan default value untuk field user pada semua row yang telah dibuat pada basis data. dan pilih `1` lagi untuk  menetapkan user dengan ID 1 (yang sudah kita buat sebelumnya) pada model yang sudah ada.
+
+Terakhir, lakukan `python manage.py migrate` untuk mengaplikasikan migrasi yang dilakukan pada poin sebelumnya.
+
+### Menampilkan detail informasi pengguna yang sedang logged in seperti username dan menerapkan cookies seperti last login pada halaman utama aplikasi.
+Informasi Pengguna
+![Informasi User](last_login.jpg)

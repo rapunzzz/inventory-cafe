@@ -695,3 +695,40 @@ Bukalah berkas main.html yang ada pada folder main/templates dan ubahlah kode ya
 </tr>
 ...
 ```
+
+## Implementasi bonus
+Mengubah code pada looping product menjadi berikut 
+```html
+...
+{% for product in products %}
+    <tr{% if forloop.last %} class="last-row"{% endif %}>
+        <td>{{product.name}}</td>
+        <td>{{product.amount}}</td>
+        <td>{{product.description}}</td>
+        <td>{{product.date_added}}</td>
+        <td>
+            <a href="{% url 'main:edit_product' product.pk %}">
+                <button>
+                    Edit
+                </button>
+            </a>
+            <a href="{% url 'main:delete_product' product.pk %}">
+                <button>
+                    Delete
+                </button>
+            </a>
+        </td>
+    </tr>
+{% endfor %}
+...
+
+```
+
+Kemudian tambahkan code untuk mengubah warnanya
+```html
+<style>
+    .last-row td {
+        color: blue; 
+    }
+</style>
+```

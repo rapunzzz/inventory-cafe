@@ -20,7 +20,7 @@
         {% comment %} Berikut cara memperlihatkan data produk di bawah baris ini {% endcomment %}
 
         {% for product in products %}
-            <tr>
+            <tr{% if forloop.last %} class="last-row"{% endif %}>
                 <td>{{product.name}}</td>
                 <td>{{product.amount}}</td>
                 <td>{{product.description}}</td>
@@ -40,7 +40,11 @@
             </tr>
         {% endfor %}
     </table>
-
+    <style>
+        .last-row td {
+            color: blue; 
+        }
+    </style>
     <br />
 
     <a href="{% url 'main:create_product' %}">

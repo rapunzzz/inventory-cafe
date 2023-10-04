@@ -513,3 +513,185 @@ Terakhir, lakukan `python manage.py migrate` untuk mengaplikasikan migrasi yang 
 ### Menampilkan detail informasi pengguna yang sedang logged in seperti username dan menerapkan cookies seperti last login pada halaman utama aplikasi.
 Informasi Pengguna
 ![Informasi User](last_login.jpg)
+
+
+### Tugas 5
+
+## Jelaskan manfaat dari setiap element selector dan kapan waktu yang tepat untuk menggunakannya.
+Manfaat dari setiap element selector  dan waktu yang tepat untuk menggunakannya.
+1. `Selector Elemen` : Memilih semua elemen HTML dengan jenis elemen yang sama.Selector elemen berguna ketika Anda ingin menerapkan gaya yang sama ke semua elemen dengan jenis yang sama, tanpa memandang kelas atau ID.
+
+2. `Selector Kelas` : Memilih elemen-elemen dengan atribut class tertentu, memungkinkan Anda untuk menerapkan gaya khusus pada elemen-elemen tersebut. Selector kelas ketika Anda ingin mengaplikasikan gaya khusus ke beberapa elemen yang memiliki class yang sama.
+
+3. `Selector ID` : Memilih elemen dengan atribut id tertentu, yang unik di seluruh halaman web. Hal ini memungkinkan Anda untuk menerapkan gaya khusus pada elemen tersebut.
+Selector ID berguna ketika Anda ingin mengaplikasikan gaya khusus ke elemen tunggal yang memiliki ID tertentu.
+
+4. `Selector Turunan` : Memilih elemen yang merupakan turunan dari elemen lain, yang berada dalam hierarki yang lebih dalam.
+Selector turunan ketika Anda ingin mengaplikasikan gaya ke elemen-elemen yang berada dalam elemen lain, misalnya mengatur gaya pada paragraf dalam sebuah div.
+
+5. `Selector Pseudo-class` : Memilih elemen dalam situasi khusus, seperti saat elemen tersebut diarahkan oleh mouse (:hover) atau berada dalam keadaan tertentu (misalnya, :first-child).
+Selector pseudo-class digunakan untuk mengatur gaya elemen dalam situasi atau kondisi khusus.
+
+6. `Selector Universal` : Memilih semua elemen pada halaman web.
+Penggunaan selector universal harus digunakan dengan hati-hati karena dapat memengaruhi kinerja dan kompleksitas kode CSS. Ini dapat digunakan dalam situasi tertentu seperti reset CSS atau untuk mengatur gaya dasar pada seluruh halaman web. 
+
+## Jelaskan HTML5 Tag yang kamu ketahui.
+1. <main>: Mendefinisikan konten utama dari sebuah halaman web, biasanya berisi konten yang relevan dengan halaman tersebut.
+
+2. <aside>: Menunjukkan konten yang merupakan informasi tambahan atau sampingan, biasanya berada di sisi kanan atau kiri dari konten utama.
+
+3. <figure> dan <figcaption>: <figure> digunakan untuk mengelompokkan elemen multimedia seperti gambar, audio, atau video, sedangkan <figcaption> digunakan untuk menambahkan keterangan atau deskripsi untuk elemen multimedia tersebut.
+
+4. <time>: Digunakan untuk menyediakan informasi tanggal dan waktu, serta format yang terkait.
+
+5. <mark>: Menyoroti atau menandai teks dalam konten, biasanya untuk menyoroti kata-kata kunci.
+
+6. <details> dan <summary>: Digunakan untuk membuat daftar yang dapat dikembangkan atau dipersempit oleh pengguna.
+
+7. <section>: Mendefinisikan sebuah bagian dalam dokumen yang memiliki konten terkait. Ini digunakan untuk mengelompokkan konten yang memiliki arti tertentu.
+
+8. <header>: Digunakan untuk mendefinisikan bagian atas (header) dari sebuah halaman web atau bagian dari konten yang merupakan judul atau informasi umum tentang halaman.
+
+9. <nav>: Menunjukkan bagian yang berisi menu navigasi atau tautan menuju halaman-halaman lain di situs web.
+
+10. <footer>:  Digunakan untuk mendefinisikan bagian bawah (footer) dari halaman web atau bagian dari konten yang berisi informasi seperti hak cipta, tautan ke halaman lain, atau informasi kontak.
+
+
+## Jelaskan perbedaan antara margin dan padding.
+1. Margin :  ruang di luar batas luar elemen (outer edge).Margin digunakan untuk mengontrol jarak antara elemen dengan elemen-elemen lain di sekitarnya, sehingga memengaruhi tata letak global elemen tersebut.
+2. Padding : ruang di antara batas dalam elemen dan kontennya sendiri (inner edge). Padding digunakan untuk mengatur jarak antara konten elemen dan batasnya sendiri, sehingga memengaruhi tampilan elemen secara internal.
+## Jelaskan perbedaan antara framework CSS Tailwind dan Bootstrap. Kapan sebaiknya kita menggunakan Bootstrap daripada Tailwind, dan sebaliknya?
+`Tailwind CSS` 
+1. Tailwind CSS membangun tampilan dengan menggabungkan kelas-kelas utilitas yang telah didefinisikan sebelumnya.
+
+2. Tailwind CSS memiliki file CSS yang lebih kecil sedikit dibandingkan Bootstrap dan hanya akan memuat kelas-kelas utilitas yang ada
+
+3. Tailwind CSS memiliki memberikan fleksibilitas dan adaptabilitas tinggi terhadap proyek
+
+4. Tailwind CSS memiliki pembelajaran yang lebih curam karena memerlukan pemahaman terhadap kelas-kelas utilitas yang tersedia dan bagaimana menggabungkannya untuk mencapai tampilan yang diinginkan.
+
+Tailwind digunakan ketika ingin memiliki kendali yang lebih besar atas tampilan, ingin menghindari overhead CSS yang tidak perlu, atau jika ingin membuat desain yang sangat kustom sesuai kebutuhan yang diperlukan.
+
+`Bootstrap`
+1. Bootstrap menggunakan gaya dan komponen yang telah didefinisikan, yang memiliki tampilan yang sudah jadi dan dapat digunakan secara langsung.
+
+2. Bootstrap memiliki file CSS yang lebih besar dibandingkan dengan Tailwind CSS karena termasuk banyak komponen yang telah didefinisikan.
+
+3. Bootstrap sering kali menghasilkan tampilan yang lebih konsisten di seluruh proyek karena menggunakan komponen yang telah didefinisikan.
+
+4. Bootstrap memiliki pembelajaran yang lebih cepat untuk pemula karena dapat mulai dengan komponen yang telah didefinisikan.
+
+Bootstrap digunakan ketika ingin mengembangkan situs web atau aplikasi dengan cepat, tidak ingin menulis banyak CSS kustom, dan memerlukan komponen-komponen siap pakai.
+
+## Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+
+Menambahkan Bootstrap CSS dan JS ke `templates/base.html`
+CSS
+```html
+<head>
+    {% block meta %}
+        ...
+    {% endblock meta %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+```
+JS
+```html
+<head>
+    ...
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-KyZXEAg3QhqLMpG8r+J4jsl5c9zdLKaUk5Ae5f5b1bw6AUn5f5v8FZJoMxm6f5cH1" crossorigin="anonymous"></script>
+</head>
+```
+
+Menambahkan fitur Edit dan Delete pada Aplikasi
+Buka `views.py` yang ada pada subdirektori `main`, dan buatlah fungsi baru bernama `edit_product` dan `delete_product`.
+
+Tambahkan potongan kode berikut pada fungsi `edit_product`
+```python
+def edit_product(request, id):
+    # Get product berdasarkan ID
+    product = Product.objects.get(pk = id)
+
+    # Set product sebagai instance dari form
+    form = ProductForm(request.POST or None, instance=product)
+
+    if form.is_valid() and request.method == "POST":
+        # Simpan form dan kembali ke halaman awal
+        form.save()
+        return HttpResponseRedirect(reverse('main:show_main'))
+
+    context = {'form': form}
+    return render(request, "edit_product.html", context)
+```
+
+Buat fungsi baru dengan nama `delete_product` yang menerima parameter request dan id pada `views.py` di folder main untuk menghapus data produk. 
+```python
+def delete_product(request, id):
+    # Get data berdasarkan ID
+    product = Product.objects.get(pk = id)
+    # Hapus data
+    product.delete()
+    # Kembali ke halaman awal
+    return HttpResponseRedirect(reverse('main:show_main'))
+```
+
+
+Buatlah berkas HTML baru dengan nama `edit_product.html` pada subdirektori `main/templates`.
+```html
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<h1>Edit Product</h1>
+
+<form method="POST">
+    {% csrf_token %}
+    <table>
+        {{ form.as_table }}
+        <tr>
+            <td></td>
+            <td>
+                <input type="submit" value="Edit Product"/>
+            </td>
+        </tr>
+    </table>
+</form>
+
+{% endblock %}
+```
+
+Buka `urls.py` yang berada pada direktori `main` dan import fungsi `edit_product` dan fungsi `delete_product` yang sudah dibuat.
+```python
+from main.views import edit_product,delete_product
+```
+
+Buka` main.html` yang berada pada subdirektori main/templates. Tambahkan potongan kode berikut sejajar dengan elemen <td> terakhir agar terlihat tombol edit pada setiap baris tabel
+```html
+...
+path('edit-product/<int:id>', edit_product, name='edit_product'),
+path('delete/<int:id>', delete_product, name='delete_product'), 
+...
+```
+
+Bukalah berkas main.html yang ada pada folder main/templates dan ubahlah kode yang sudah ada menjadi seperti berikut agar terdapat tombol hapus untuk setiap produk.
+```html
+...
+<tr>
+    ...
+    <td>
+        <a href="{% url 'main:edit_product' product.pk %}">
+            <button>
+                Edit
+            </button>
+        </a>
+        <a href="{% url 'main:delete_product' product.pk %}">
+              <button>
+                  Delete
+              </button>
+          </a>
+    </td>
+</tr>
+...
+```

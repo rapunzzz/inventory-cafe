@@ -732,3 +732,58 @@ Kemudian tambahkan code untuk mengubah warnanya
     }
 </style>
 ```
+
+### Tugas 6
+
+## Jelaskan perbedaan antara asynchronous programming dengan synchronous programming.
+Asynchronous programming adalah sebuah teknik pemrograman dimana suatu fungsi lain tetap dapat dijalankan meskipun fungsi sebelumnya masih dalam proses, dan tanpa harus meunggu fungsi tersebut selesai dijalankan.
+Synchronous programming adalah sebuah teknik pemrograman di mana setiap tugas atau fungsi dieksekusi secara berurutan, satu per satu. 
+## Dalam penerapan JavaScript dan AJAX, terdapat penerapan paradigma event-driven programming. Jelaskan maksud dari paradigma tersebut dan sebutkan salah satu contoh penerapannya pada tugas ini.
+Paradigma event-driven programming adalah pendekatan dalam pemrograman di mana eksekusi program terutama ditentukan oleh kejadian (events) yang terjadi, seperti tindakan pengguna (seperti mengklik tombol), respons dari sistem (seperti menerima data dari server), atau kejadian lainnya.
+Contoh penerapannya pada tugas ini terletak pada pembuatan button addProduct by ajax yang menggunakan properti onclick
+## Jelaskan penerapan asynchronous programming pada AJAX.
+Penerapan asynchronous programming pada AJAX (Asynchronous JavaScript and XML) adalah pendekatan yang memungkinkan aplikasi web untuk melakukan komunikasi dengan server tanpa menghentikan eksekusi program, sehingga menjaga responsivitas dan pengalaman pengguna yang lebih baik. Ketika browser melakukan permintaan AJAX, seperti permintaan GET atau POST, browser tetap dapat menjalankan kode JavaScript lainnya secara bersamaan tanpa terjebak dalam menunggu respons dari server. Ini memungkinkan aplikasi web untuk menjalankan berbagai tugas tanpa terganggu oleh operasi jaringan yang memerlukan waktu, seperti pengambilan data dari server.
+## Pada PBP kali ini, penerapan AJAX dilakukan dengan menggunakan Fetch API daripada library jQuery. Bandingkanlah kedua teknologi tersebut dan tuliskan pendapat kamu teknologi manakah yang lebih baik untuk digunakan.
+Fetch API: Merupakan bagian dari JavaScript modern dan terintegrasi langsung ke dalam browser. Ini berarti Fetch API biasanya lebih ringan, karena Anda tidak perlu mengunduh library eksternal tambahan.Menggunakan Promises untuk mengelola permintaan dan respons. Ini mengharuskan Anda mengatasi tindakan saat permintaan selesai dengan menggunakan `then` dan `catch`.
+jQuery: jQuery adalah library JavaScript yang lebih besar. Ini termasuk banyak fitur lain selain AJAX, dan ukurannya lebih besar daripada Fetch API. Menggunakan fungsi seperti `$.ajax()` untuk melakukan permintaan. jQuery memakai callback functions untuk menangani respons, yang membuat sintaksisnya lebih nyaman untuk beberapa pengembang.
+
+ Pada aplikasi web modern, Fetch API biasanya merupakan pilihan yang lebih direkomendasikan, sementara jQuery tetap bermanfaat dalam situasi di mana kompatibilitas browser sangat penting atau di mana Anda sudah menggunakan jQuery untuk komponen lain dalam proyek Anda.
+## Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+- AJAX GET
+Pertama membuat fungsi baru pada `views.py` dengan nama `get_product_json` yang menerima parameter request dan menghubungkan di `urls.py`. dan isi code tersebut yaitu :
+```python
+def get_product_json(request):
+    product_item = Product.objects.all()
+    return HttpResponse(serializers.serialize('json', product_item))
+```
+Kemudian saya juga menerapkan card pada data item dan codenya berubah menjadi seperti berikut :
+```html
+ async function refreshProducts() {
+        document.getElementById("product_table").innerHTML = ""
+        const products = await getProducts()
+        products.forEach((item) => {
+            const productCard = `
+                <div class="card " style="width: 18rem; display: inline-block; margin: 20px 10px 10px 10px;">
+                    <div class="card-body">
+                        <h5 class="card-title">${item.fields.name}</h5>
+                        <p class="card-text">${item.fields.description}</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Amount: ${item.fields.amount}</li>
+                        <li class="list-group-item">Date Added: ${item.fields.date_added}</li>
+                    </ul>
+                    <div class="card-body text-center">
+                        <a href="edit-product/${item.pk}" class="btn btn-primary">Edit</a>
+                        <a href="delete/${item.pk}" class="btn btn-danger">Delete</a>
+                    </div>
+                </div>
+            `;
+            document.getElementById("product_table").insertAdjacentHTML("beforeend", productCard);
+        })
+        }
+```
+
+- AJAX POST
+Pertama membuat halaman modal yang muncul saat saya klik tombol "Add Product by AJAX". Modal ini berisi formulir untuk membuat produk baru dengan input nama, jumlah, harga, dan deskripsi. Di dalam modal juga ada tombol "Close" yang akan menambahkan produk baru ke dalam tabel jika formulir valid. Saya telah menulis fungsi add_item_ajax di views.py untuk menangani penambahan item saat formulir valid. Selain itu, saya sudah menambahkan path ke fungsi tersebut di urls.py. Di dalam halaman main.html, saya menambahkan fungsi addProduct untuk membuat produk baru, dan kemudian melakukan pembaruan asinkron dengan memanggil refreshProducts().
+- Perintah collecstatic
+Melakukan perintah ```python manage.py collectstatic` untuk mengumpulkan berkas static di suatu direktori tertentu

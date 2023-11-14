@@ -38,7 +38,9 @@
             color: blue; 
         }
     </style>
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Product by AJAX</button>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Product by AJAX</button> 
+
+
     <a href="{% url 'main:create_product' %}">
         <button class="btn btn-primary">
             Add New Product
@@ -120,6 +122,8 @@
             return false
         }
         document.getElementById("button_add").onclick = addProduct
+
+
         // Hitung jumlah item dari tabel data
         var item_count = {{ products|length }};
         
